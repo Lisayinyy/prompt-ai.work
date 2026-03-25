@@ -7,7 +7,7 @@
   <meta name="description" content="Turn rough ideas into professional AI prompts in one click. Auto-fill into ChatGPT, Claude, Kimi and 15+ AI platforms." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -26,11 +26,16 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
       background: var(--white);
       color: var(--ink);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+    }
+
+    /* 中文模式字体 */
+    :lang(zh) body, .lang-zh body {
+      font-family: 'Noto Serif SC', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
     }
 
     /* NAV */
@@ -91,14 +96,21 @@
       50% { opacity: 0.4; }
     }
     h1 {
-      font-family: 'Instrument Serif', serif;
+      font-family: 'Instrument Serif', 'Noto Serif SC', serif;
       font-size: clamp(2.5rem, 4vw, 3.5rem);
       line-height: 1.15;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
       color: var(--ink);
       margin-bottom: 20px;
     }
-    h1 em { font-style: italic; color: var(--violet); }
+    h1 em {
+      font-style: italic;
+      color: var(--violet);
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .hero-sub {
       font-size: 1.05rem; color: var(--ink-2);
       line-height: 1.7; margin-bottom: 36px;
@@ -157,78 +169,44 @@
       font-size: 0.8rem; color: var(--ink-3);
     }
 
-    /* MOCK UI */
-    .hero-visual { position: relative; }
-    .mock-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    /* PHONE FRAME */
+    .hero-visual {
+      position: relative;
+      display: flex; justify-content: center; align-items: center;
     }
-    .mock-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
+    .phone-frame {
+      position: relative;
+      width: 280px;
+      background: #1a1a1a;
+      border-radius: 44px;
+      padding: 12px;
+      box-shadow:
+        0 0 0 1px #333,
+        0 30px 80px rgba(0,0,0,0.25),
+        0 10px 30px rgba(124,58,237,0.15);
     }
-    .mock-logo { font-family: 'Instrument Serif', serif; font-size: 1rem; }
-    .mock-version {
-      font-size: 0.7rem; background: var(--surface);
-      padding: 3px 8px; border-radius: 6px; color: var(--ink-3);
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 80px; height: 6px;
+      background: #333;
+      border-radius: 3px;
+      z-index: 2;
     }
-    .mock-tabs { display: flex; gap: 4px; margin-bottom: 16px; }
-    .mock-tab {
-      padding: 5px 12px; border-radius: 7px; font-size: 0.8rem; cursor: default;
-      color: var(--ink-3);
+    .phone-screen {
+      border-radius: 34px;
+      overflow: hidden;
+      background: #fff;
+      aspect-ratio: 9/19.5;
     }
-    .mock-tab.active { background: var(--ink); color: white; }
-    .mock-label { font-size: 0.75rem; color: var(--ink-3); margin-bottom: 6px; }
-    .mock-select {
-      display: flex; align-items: center; justify-content: space-between;
-      border: 1px solid var(--border); border-radius: 8px;
-      padding: 8px 12px; margin-bottom: 12px; font-size: 0.85rem;
-    }
-    .mock-tones { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
-    .mock-tone {
-      padding: 4px 10px; border-radius: 6px; font-size: 0.75rem;
-      border: 1px solid var(--border); cursor: default; color: var(--ink-2);
-    }
-    .mock-tone.active { background: var(--ink); color: white; border-color: var(--ink); }
-    .mock-input {
-      border: 1px solid var(--border); border-radius: 8px;
-      padding: 10px 12px; font-size: 0.82rem; color: var(--ink-2);
-      margin-bottom: 12px; line-height: 1.5; min-height: 64px;
-    }
-    .mock-recommend {
-      background: var(--surface); border-radius: 8px; padding: 10px 12px;
-      margin-bottom: 12px;
-    }
-    .mock-recommend-title { font-size: 0.75rem; color: var(--ink-2); margin-bottom: 8px; }
-    .mock-model {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 6px;
-    }
-    .mock-model:last-child { margin-bottom: 0; }
-    .mock-model-info { display: flex; align-items: center; gap: 8px; }
-    .mock-model-num {
-      width: 20px; height: 20px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.7rem; font-weight: 600; color: white;
-    }
-    .num-1 { background: var(--violet); }
-    .num-2 { background: var(--ink); }
-    .mock-model-name { font-size: 0.8rem; font-weight: 500; }
-    .mock-model-tag {
-      font-size: 0.65rem; padding: 2px 6px; border-radius: 4px;
-      background: var(--violet-light); color: var(--violet);
-    }
-    .mock-model-tag.perf { background: #fef9c3; color: #854d0e; }
-    .mock-go { font-size: 0.75rem; color: var(--violet); }
-    .mock-btn {
-      width: 100%; background: var(--ink); color: white;
-      border-radius: 8px; padding: 10px; text-align: center;
-      font-size: 0.85rem; font-weight: 500;
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
     }
 
     /* SUPPORTED */
@@ -427,51 +405,16 @@
     <p class="hero-note" data-i18n="heroNote">Works with ChatGPT, Claude, Kimi, DeepSeek and 15+ AI platforms</p>
   </div>
 
-  <!-- Mock UI -->
+  <!-- Real Product Screenshot -->
   <div class="hero-visual">
-    <div class="mock-card">
-      <div class="mock-header">
-        <span class="mock-logo">prompt.ai</span>
-        <span class="mock-version">v7.7</span>
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <img
+          id="productScreenshot"
+          src="screenshot-en.png"
+          alt="prompt.ai app screenshot"
+        />
       </div>
-      <div class="mock-tabs">
-        <div class="mock-tab active">✦ Optimize</div>
-        <div class="mock-tab">⊙ History</div>
-        <div class="mock-tab">↗ Insights</div>
-      </div>
-      <div class="mock-label">Target AI</div>
-      <div class="mock-select"><span>⚡ MiniMax</span><span>∨</span></div>
-      <div class="mock-label">Tone</div>
-      <div class="mock-tones">
-        <div class="mock-tone active">Professional</div>
-        <div class="mock-tone">Casual</div>
-        <div class="mock-tone">Academic</div>
-        <div class="mock-tone">Creative</div>
-      </div>
-      <div class="mock-label">Your prompt</div>
-      <div class="mock-input">Write a WeChat article about AI trends this week</div>
-      <div class="mock-recommend">
-        <div class="mock-recommend-title">✏ Detected: Writing task</div>
-        <div class="mock-model">
-          <div class="mock-model-info">
-            <div class="mock-model-num num-1">1</div>
-            <div>
-              <div class="mock-model-name">Claude Sonnet <span class="mock-model-tag">Best writer</span></div>
-            </div>
-          </div>
-          <span class="mock-go">Use →</span>
-        </div>
-        <div class="mock-model">
-          <div class="mock-model-info">
-            <div class="mock-model-num num-2">2</div>
-            <div>
-              <div class="mock-model-name">MiniMax M2.7 <span class="mock-model-tag perf">Best value</span></div>
-            </div>
-          </div>
-          <span class="mock-go">Use →</span>
-        </div>
-      </div>
-      <div class="mock-btn">✦ Optimize prompt</div>
     </div>
   </div>
 </section>
@@ -698,6 +641,12 @@
       const key = el.getAttribute('data-i18n-placeholder');
       if (t[key] !== undefined) el.placeholder = t[key];
     });
+    // 切换产品截图
+    const screenshot = document.getElementById('productScreenshot');
+    if (screenshot) {
+      screenshot.src = currentLang === 'zh' ? 'screenshot-zh.png' : 'screenshot-en.png';
+      screenshot.alt = currentLang === 'zh' ? 'prompt.ai 插件截图' : 'prompt.ai app screenshot';
+    }
   }
 
   const WORKER_URL = 'https://prompt-optimizer-api.prompt-optimizer.workers.dev';
