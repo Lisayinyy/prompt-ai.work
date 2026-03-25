@@ -164,44 +164,86 @@
       font-size: 0.8rem; color: var(--ink-3);
     }
 
-    /* PHONE FRAME */
-    .hero-visual {
-      position: relative;
-      display: flex; justify-content: center; align-items: center;
+    /* MOCK UI */
+    .hero-visual { position: relative; }
+    .mock-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(124,58,237,0.06);
+      max-width: 420px;
     }
-    .phone-frame {
-      position: relative;
-      width: 260px;
-      background: #1a1a1a;
-      border-radius: 44px;
-      padding: 10px;
-      box-shadow:
-        0 0 0 1px #333,
-        0 30px 80px rgba(0,0,0,0.2),
-        0 10px 30px rgba(124,58,237,0.12);
+    .mock-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
     }
-    .phone-frame::before {
-      content: '';
-      position: absolute;
-      top: 16px; left: 50%;
-      transform: translateX(-50%);
-      width: 70px; height: 5px;
-      background: #444;
-      border-radius: 3px;
-      z-index: 2;
+    .mock-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 500; letter-spacing: -0.01em; }
+    .mock-version {
+      font-size: 0.72rem; background: var(--surface);
+      padding: 4px 10px; border-radius: 20px; color: var(--ink-3);
+      border: 1px solid var(--border);
     }
-    .phone-screen {
-      border-radius: 36px;
-      overflow: hidden;
-      background: #fff;
-      aspect-ratio: 390/844;
+    .mock-tabs { display: flex; gap: 6px; margin-bottom: 20px; align-items: center; }
+    .mock-tab {
+      padding: 7px 14px; border-radius: 10px; font-size: 0.82rem; cursor: default;
+      color: var(--ink-3); font-weight: 500;
     }
-    .phone-screen img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
+    .mock-tab.active {
+      background: var(--ink); color: white;
+      border-radius: 10px;
+    }
+    .mock-label { font-size: 0.75rem; color: var(--ink-3); margin-bottom: 8px; font-weight: 500; letter-spacing: 0.01em; }
+    .mock-select {
+      display: flex; align-items: center; justify-content: space-between;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      padding: 10px 14px; margin-bottom: 16px; font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .mock-tones { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+    .mock-tone {
+      padding: 6px 14px; border-radius: 8px; font-size: 0.8rem;
+      border: 1.5px solid var(--border); cursor: default; color: var(--ink-2);
+      font-weight: 500;
+    }
+    .mock-tone.active { background: var(--ink); color: white; border-color: var(--ink); }
+    .mock-input {
+      border: 1.5px solid var(--border); border-radius: 10px;
+      padding: 12px 14px; font-size: 0.875rem; color: var(--ink-2);
+      margin-bottom: 16px; line-height: 1.6; min-height: 72px;
+      background: var(--surface);
+    }
+    .mock-recommend {
+      background: var(--surface); border-radius: 10px; padding: 12px 14px;
+      margin-bottom: 16px; border: 1px solid var(--border);
+    }
+    .mock-recommend-title { font-size: 0.78rem; color: var(--ink-2); margin-bottom: 10px; }
+    .mock-model {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .mock-model:last-child { margin-bottom: 0; }
+    .mock-model-info { display: flex; align-items: center; gap: 10px; }
+    .mock-model-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700; color: white;
+    }
+    .num-1 { background: var(--violet); }
+    .num-2 { background: var(--ink); }
+    .mock-model-name { font-size: 0.85rem; font-weight: 600; }
+    .mock-model-tag {
+      font-size: 0.68rem; padding: 2px 8px; border-radius: 6px;
+      background: var(--violet-light); color: var(--violet); margin-left: 6px;
+    }
+    .mock-model-tag.perf { background: #fef9c3; color: #854d0e; }
+    .mock-go { font-size: 0.8rem; color: var(--violet); font-weight: 500; }
+    .mock-btn {
+      width: 100%; background: var(--ink); color: white;
+      border-radius: 12px; padding: 13px; text-align: center;
+      font-size: 0.9rem; font-weight: 600; letter-spacing: -0.01em;
     }
 
     /* SUPPORTED */
@@ -400,16 +442,51 @@
     <p class="hero-note" data-i18n="heroNote">Works with ChatGPT, Claude, Kimi, DeepSeek and 15+ AI platforms</p>
   </div>
 
-  <!-- Real Product Screenshot -->
+  <!-- Mock UI -->
   <div class="hero-visual">
-    <div class="phone-frame">
-      <div class="phone-screen">
-        <img
-          id="productScreenshot"
-          src="screenshot-en.png"
-          alt="prompt.ai app screenshot"
-        />
+    <div class="mock-card">
+      <div class="mock-header">
+        <span class="mock-logo">prompt.ai</span>
+        <span class="mock-version">v7.7</span>
       </div>
+      <div class="mock-tabs">
+        <div class="mock-tab active">✦ Optimize</div>
+        <div class="mock-tab">⊙ History</div>
+        <div class="mock-tab">↗ Insights</div>
+      </div>
+      <div class="mock-label">Target AI</div>
+      <div class="mock-select"><span>⚡ MiniMax</span><span style="color:var(--ink-3)">V</span></div>
+      <div class="mock-label">Tone</div>
+      <div class="mock-tones">
+        <div class="mock-tone active">Professional</div>
+        <div class="mock-tone">Casual</div>
+        <div class="mock-tone">Academic</div>
+        <div class="mock-tone">Creative</div>
+      </div>
+      <div class="mock-label">Your prompt</div>
+      <div class="mock-input">Write a WeChat article about AI trends this week</div>
+      <div class="mock-recommend">
+        <div class="mock-recommend-title">⇌ Detected: Writing task</div>
+        <div class="mock-model">
+          <div class="mock-model-info">
+            <div class="mock-model-num num-1">1</div>
+            <div>
+              <div class="mock-model-name">Claude Sonnet <span class="mock-model-tag">Best writer</span></div>
+            </div>
+          </div>
+          <span class="mock-go">Use →</span>
+        </div>
+        <div class="mock-model">
+          <div class="mock-model-info">
+            <div class="mock-model-num num-2">2</div>
+            <div>
+              <div class="mock-model-name">MiniMax M2.7 <span class="mock-model-tag perf">Best value</span></div>
+            </div>
+          </div>
+          <span class="mock-go">Use →</span>
+        </div>
+      </div>
+      <div class="mock-btn">✦ Optimize prompt</div>
     </div>
   </div>
 </section>
