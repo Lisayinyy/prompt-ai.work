@@ -700,8 +700,7 @@
     });
   }
 
-  const SUPABASE_URL = 'https://vyuzkbdxsweaqftyqifh.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_x_ruVcqxkYJNLEVDeQDwwg_H3my-InQ';
+  const WORKER_URL = 'https://prompt-optimizer-api.prompt-optimizer.workers.dev';
 
   async function joinWaitlist(source) {
     const emailEl = document.getElementById(source === 'hero' ? 'heroEmail' : 'ctaEmail');
@@ -725,15 +724,10 @@
     btnEl.querySelector('span').textContent = currentLang === 'zh' ? '提交中...' : 'Joining...';
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+      const res = await fetch(`${WORKER_URL}/waitlist`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({ email, source, lang: currentLang, created_at: new Date().toISOString() })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source, lang: currentLang })
       });
 
       if (res.ok || res.status === 201 || res.status === 409) {
