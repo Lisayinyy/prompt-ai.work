@@ -474,41 +474,41 @@
       </div>
       <!-- Tabs -->
       <div class="mock-tabs">
-        <div class="mock-tab active">✦ Optimize</div>
-        <div class="mock-tab">⊙ History</div>
-        <div class="mock-tab">↗ Insights</div>
-        <div class="mock-tab">⚙ Settings</div>
+        <div class="mock-tab active" id="mockTab1">✦ Optimize</div>
+        <div class="mock-tab" id="mockTab2">⊙ History</div>
+        <div class="mock-tab" id="mockTab3">↗ Insights</div>
+        <div class="mock-tab" id="mockTab4">⚙ Settings</div>
       </div>
       <!-- Target AI -->
-      <div class="mock-label">Target AI</div>
+      <div class="mock-label" id="mockLabelTarget">Target AI</div>
       <div class="mock-select">
-        <span>🌐 Any AI</span>
+        <span id="mockSelectText">🌐 Any AI</span>
         <span style="color:#9ca3af;font-size:0.75rem">∨</span>
       </div>
       <!-- Tone -->
-      <div class="mock-label">Tone</div>
+      <div class="mock-label" id="mockLabelTone">Tone</div>
       <div class="mock-tones">
-        <div class="mock-tone active">Professional</div>
-        <div class="mock-tone">Casual</div>
-        <div class="mock-tone">Academic</div>
-        <div class="mock-tone">Creative</div>
-        <div class="mock-tone">Concise</div>
+        <div class="mock-tone active" id="mockTone1">Professional</div>
+        <div class="mock-tone" id="mockTone2">Casual</div>
+        <div class="mock-tone" id="mockTone3">Academic</div>
+        <div class="mock-tone" id="mockTone4">Creative</div>
+        <div class="mock-tone" id="mockTone5">Concise</div>
       </div>
       <!-- Prompt -->
-      <div class="mock-label">Your Prompt</div>
-      <div class="mock-input" style="color:#9ca3af">Type or paste your prompt here...</div>
+      <div class="mock-label" id="mockLabelPrompt">Your Prompt</div>
+      <div class="mock-input" id="mockInputPlaceholder" style="color:#9ca3af">Type or paste your prompt here...</div>
       <div class="mock-input-footer">
-        <span>0 chars</span>
-        <span>💡 Be specific for best results</span>
+        <span id="mockChars">0 chars</span>
+        <span id="mockTip">💡 Be specific for best results</span>
       </div>
       <!-- Button -->
-      <div class="mock-btn">✦ Optimize Prompt →</div>
+      <div class="mock-btn" id="mockBtn">✦ Optimize Prompt →</div>
       <!-- Footer -->
       <div class="mock-footer">
-        <span>12 optimizations today</span>
+        <span id="mockFooterCount">12 optimizations today</span>
         <div class="mock-status">
           <div class="mock-status-dot"></div>
-          <span>Connected</span>
+          <span id="mockFooterStatus">Connected</span>
         </div>
       </div>
     </div>
@@ -737,12 +737,33 @@
       const key = el.getAttribute('data-i18n-placeholder');
       if (t[key] !== undefined) el.placeholder = t[key];
     });
-    // 切换产品截图
-    const screenshot = document.getElementById('productScreenshot');
-    if (screenshot) {
-      screenshot.src = currentLang === 'zh' ? 'screenshot-zh.png' : 'screenshot-en.png';
-      screenshot.alt = currentLang === 'zh' ? 'prompt.ai 插件截图' : 'prompt.ai app screenshot';
-    }
+    // 切换 Mock UI 语言
+    const isZh = currentLang === 'zh';
+    const mockUI = {
+      mockTab1:           isZh ? '✦ 优化'           : '✦ Optimize',
+      mockTab2:           isZh ? '⊙ 历史'           : '⊙ History',
+      mockTab3:           isZh ? '↗ 洞察'           : '↗ Insights',
+      mockTab4:           isZh ? '⚙ 设置'           : '⚙ Settings',
+      mockLabelTarget:    isZh ? '目标 AI'          : 'Target AI',
+      mockSelectText:     isZh ? '🌐 所有 AI'       : '🌐 Any AI',
+      mockLabelTone:      isZh ? '语气'             : 'Tone',
+      mockTone1:          isZh ? '专业'             : 'Professional',
+      mockTone2:          isZh ? '日常'             : 'Casual',
+      mockTone3:          isZh ? '学术'             : 'Academic',
+      mockTone4:          isZh ? '创意'             : 'Creative',
+      mockTone5:          isZh ? '简洁'             : 'Concise',
+      mockLabelPrompt:    isZh ? '你的提示词'        : 'Your Prompt',
+      mockInputPlaceholder: isZh ? '输入或粘贴你的提示词...' : 'Type or paste your prompt here...',
+      mockChars:          isZh ? '0 字符'           : '0 chars',
+      mockTip:            isZh ? '💡 越具体，效果越好' : '💡 Be specific for best results',
+      mockBtn:            isZh ? '✦ 优化提示词 →'   : '✦ Optimize Prompt →',
+      mockFooterCount:    isZh ? '今日已优化 12 次'  : '12 optimizations today',
+      mockFooterStatus:   isZh ? '已连接'           : 'Connected',
+    };
+    Object.entries(mockUI).forEach(([id, text]) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    });
   }
 
   const WORKER_URL = 'https://prompt-optimizer-api.prompt-optimizer.workers.dev';
